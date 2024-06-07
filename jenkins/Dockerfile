@@ -10,8 +10,19 @@ RUN mkdir ${NVM_DIR}
 
 # INSTALL CURL
 RUN apt-get update \
-  && apt-get install -y curl \
+  && apt-get install -y curl lsb-release \
   && apt-get clean
+
+# INSTALL DIND
+RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
+  https://download.docker.com/linux/debian/gpg
+
+RUN echo "deb [arch=$(dpkg --print-architecture) \
+  signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \
+  https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+
+RUN apt-get update && apt-get install -y docker-ce-cli && apt-get clean
 
 # DOWNLOAD AND INSTALL NVM
 RUN curl -s https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \

@@ -3,6 +3,7 @@
 ## Herramientas y recursos necesarios
 
 - Instalar Docker
+- Instalar [Ngrok](https://ngrok.com/) (Para la integración con webhooks de forma local) u otra solución similar.
 
 ## Pasos a seguir para la instalación
 
@@ -35,3 +36,21 @@ Terminamos la configuración pulsando en "Save and Finish"
 ![Imagen](./assets/jenkins-006-instance-configuration.png)
 
 8. Listo. Con esto se instala Jenkins en nuestro computador de forma local y listo para utilizar.
+
+## Creación de un pipeline desde 0 usando el panel
+Para crear un pipeline desde 0, realizaremos los siguientes pasos:
+
+1. Selecciona
+
+
+## Integración de GitHub para lanzar eventos al realizar commit
+En este caso, configuraremos Jenkins para que ejecute el pipeline las veces que el repositorio en GitHub se actualice. En este caso, cuando se realice un commit y un push a una rama.
+
+En primer lugar, si has seguido estas instrucciones y estas ejecutando Jenkins de forma local, será necesario exponer la URL a Internet. Para esto, pueden utilizar [Ngrok](https://ngrok.com/).
+
+1. En primer lugar, iremos a nuestro repositorio en GitHub y crearemos un Webhook
+
+## Integración con herramientas de notificación para Slack y Discord
+
+
+## Integración de SonarQube para verificación de código

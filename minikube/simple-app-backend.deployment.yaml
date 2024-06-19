@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-backend-app-deployment-jenkins
+spec:
+  selector:
+   matchLabels:
+    app: simple-backend-app-jenkins
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: simple-backend-app-jenkins
+    spec:
+      containers:
+        - name: simple-backend-app-jenkins
+          image: martux1995/simple-backend-app       
+          ports:
+            - containerPort: 3000
+              name: simpleappport
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: simple-backend-app-service-jenkins
+  labels:
+    app: simple-backend-app-jenkins
+spec:   
+  ports:
+  - name: simple-backend-app-jenkins
+    port: 3000
+    nodePort : 31780 
+  #type: LoadBalancer
+  type: NodePort
+  selector:
+   app: simple-backend-app-jenkins

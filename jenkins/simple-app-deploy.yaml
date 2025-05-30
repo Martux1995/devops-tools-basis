@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-app-deploy-jenkins
+spec:
+  selector:
+   matchLabels:
+    app: simple-app-backend-jenkins
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: simple-app-backend-jenkins
+    spec:
+      containers:
+        - name: simple-app-backend-jenkins
+          image: martux1995/simple-app-backend       
+          ports:
+            - containerPort: 4000
+              name: simple-app-back-port
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: billing-app-back-service-jenkis
+  labels:
+    app: simple-app-backend-jenkins
+spec:   
+  ports:
+  - name: simple-app-backend-jenkins
+    port: 4000
+    nodePort : 31780
+  type: NodePort
+  selector:
+   app: simple-app-backend-jenkins
